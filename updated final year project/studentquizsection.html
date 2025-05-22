@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Quiz - Cybersecurity Game</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+header {
+  background-color: #004080;
+  color: #fff;
+  padding: 1rem;
+}
+
+header h1 {
+  margin-bottom: 0.5rem;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  padding: 2rem;
+}
+
+.intro {
+  margin-bottom: 2rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  background-color: #0073e6;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+.btn:hover {
+  background-color: #005bb5;
+}
+
+.audiences ul {
+  margin-top: 1rem;
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+footer {
+  background-color: #eaeaea;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+
+    .quiz-container {
+      margin-top: 2rem;
+    }
+    .question-box {
+      background: #f9f9f9;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .btn {
+      padding: 0.5rem 1rem;
+      background-color: #0074cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #005fa3;
+    }
+    .result {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cybersecurity Awareness Game</h1>
+    <nav>
+       <ul>
+        <li><a href="new.html">Home</a></li>
+        <li><a href="module2.html">Modules</a></li>
+        <li><a href="teacherdashboard.html">Teacher dashboard</a></li>
+        <li><a href="studentquizsection.html">Student Quiz Section</a></li>
+        <li><a href="Gamification.html">Gamification</a></li>
+        <li><a href="accessibility.html">Accessibility</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+        <li><a href="About.html">About</a></li>
+        <li><a href="registration.html">Register your identity</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="quiz-container">
+    <h2>Student Quiz</h2>
+    <div id="quizArea"></div>
+    <button id="submitBtn" class="btn">Submit Quiz</button>
+    <p class="result" id="scoreDisplay"></p>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Cybersecurity Awareness Game Project</p>
+  </footer>
+
+  <script>
+    const quizArea = document.getElementById("quizArea");
+    const submitBtn = document.getElementById("submitBtn");
+    const scoreDisplay = document.getElementById("scoreDisplay");
+
+    const questions = JSON.parse(localStorage.getItem("teacherQuestions")) || [];
+
+    function loadQuiz() {
+      if (questions.length === 0) {
+        quizArea.innerHTML = "<p>No questions have been added yet by the teacher.</p>";
+        submitBtn.style.display = "none";
+        return;
+      }
+
+      questions.forEach((q, index) => {
+        const div = document.createElement("div");
+        div.className = "question-box";
+        div.innerHTML = `
+          <p><strong>Q${index + 1}:</strong> ${q.question}</p>
+          <label><input type="radio" name="q${index}" value="a" required> A) ${q.a}</label><br>
+          <label><input type="radio" name="q${index}" value="b"> B) ${q.b}</label><br>
+          <label><input type="radio" name="q${index}" value="c"> C) ${q.c}</label>
+        `;
+        quizArea.appendChild(div);
+      });
+    }
+
+    function submitQuiz() {
+      let score = 0;
+      questions.forEach((q, index) => {
+        const selected = document.querySelector(`input[name="q${index}"]:checked`);
+        if (selected && selected.value === q.correct) {
+          score++;
+        }
+      });
+
+      scoreDisplay.textContent = `You scored ${score} out of ${questions.length}.`;
+      submitBtn.disabled = true;
+    }
+
+    submitBtn.addEventListener("click", submitQuiz);
+    loadQuiz();
+  </script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Phishing Awareness - Cybersecurity Awareness Game</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+header {
+  background-color: #004080;
+  color: #fff;
+  padding: 1rem;
+}
+
+header h1 {
+  margin-bottom: 0.5rem;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  padding: 2rem;
+}
+
+.intro {
+  margin-bottom: 2rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  background-color: #0073e6;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+.btn:hover {
+  background-color: #005bb5;
+}
+
+.audiences ul {
+  margin-top: 1rem;
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+footer {
+  background-color: #eaeaea;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+
+    .quiz {
+      margin-top: 2rem;
+    }
+    .question {
+      margin-bottom: 1.5rem;
+    }
+    .result {
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+    .btn {
+      padding: 0.5rem 1rem;
+      background-color: #0074cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #005fa3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cybersecurity Awareness Game</h1>
+    <nav>
+       <ul>
+        <li><a href="new.html">Home</a></li>
+        <li><a href="module2.html">Modules</a></li>
+        <li><a href="teacherdashboard.html">Teacher dashboard</a></li>
+        <li><a href="studentquizsection.html">Student Quiz Section</a></li>
+        <li><a href="Gamification.html">Gamification</a></li>
+        <li><a href="accessibility.html">Accessibility</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+        <li><a href="About.html">About</a></li>
+        <li><a href="registration.html">Register your identity</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Phishing Awareness</h2>
+
+    <section>
+      <p>Phishing is a form of cyberattack where attackers impersonate legitimate entities to steal personal information. Learn to identify and avoid phishing scams through this interactive quiz.</p>
+    </section>
+
+    <section class="quiz">
+      <h3>Phishing Quiz</h3>
+
+      <form id="quizForm">
+        <div class="question">
+          <p>1. Which of the following is a common sign of a phishing email?</p>
+          <label><input type="radio" name="q1" value="a" /> A friendly greeting from someone you know</label><br />
+          <label><input type="radio" name="q1" value="b" /> Grammatical errors and urgent language</label><br />
+          <label><input type="radio" name="q1" value="c" /> A newsletter you subscribed to</label>
+        </div>
+
+        <div class="question">
+          <p>2. What should you do if you receive a suspicious email?</p>
+          <label><input type="radio" name="q2" value="a" /> Click the link to see where it goes</label><br />
+          <label><input type="radio" name="q2" value="b" /> Forward it to your friends</label><br />
+          <label><input type="radio" name="q2" value="c" /> Report it to your IT/security team</label>
+        </div>
+
+        <div class="question">
+          <p>3. Which URL is most likely a phishing site?</p>
+          <label><input type="radio" name="q3" value="a" /> https://paypal.com</label><br />
+          <label><input type="radio" name="q3" value="b" /> https://paypa1.com</label><br />
+          <label><input type="radio" name="q3" value="c" /> https://secure.paypal.com</label>
+        </div>
+
+        <button type="button" class="btn" onclick="submitQuiz()">Submit Answers</button>
+        <p class="result" id="quizResult"></p>
+      </form>
+    </section>
+
+    <a class="btn" href="file:///D:/Final%20year%20project/module2.html">← Back to Modules</a>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Cybersecurity Awareness Game Project</p>
+  </footer>
+
+  <script>
+    function submitQuiz() {
+      const answers = {
+        q1: "b",
+        q2: "c",
+        q3: "b"
+      };
+
+      let score = 0;
+      let total = Object.keys(answers).length;
+
+      for (let q in answers) {
+        const userAnswer = document.querySelector(`input[name="${q}"]:checked`);
+        if (userAnswer && userAnswer.value === answers[q]) {
+          score++;
+        }
+      }
+
+      const result = document.getElementById("quizResult");
+      result.textContent = `You scored ${score} out of ${total}. ${score === total ? "Great job!" : "Keep learning!"}`;
+    }
+  </script>
+</body>
+</html>
